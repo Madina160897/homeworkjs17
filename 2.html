@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .all{
+            display: flex;
+            flex-direction: row;
+        }
+        .container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+        }
+
+        .figure {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: aqua;
+        }
+
+        .colors {
+            display: flex;
+        }
+
+        .colors>div {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all">
+        <div class="colors">
+            <div style="background-color: red;" onclick="changeColor()"></div>
+            <div style="background-color: greenyellow;" onclick="changeColor()"></div>
+            <div style="background-color: green;" onclick="changeColor()"></div>
+            <div style="background-color: aqua;" onclick="changeColor()"></div>
+            <div style="background-color: blueviolet;" onclick="changeColor()"></div>
+        </div>
+
+        <div class="container" onclick="myFunc(event)" style="background-color: red;">
+        </div>
+    </div>
+</body>
+<script>
+    let element = document.querySelector(".container");
+    let figureColor = "blue";
+    function myFunc() {
+        element.innerHTML += `
+        <div class="figure" onclick="event.stopPropagation()"
+        style="position: absolute; top: ${event.offsetY - 10}px; left: ${event.offsetX - 10}px">
+        </div>`
+        console.log(event)
+    }
+
+    function changeColor() {
+        element.style.backgroundColor = event.path[0].style.backgroundColor
+    }
+</script>
+
+</html>
